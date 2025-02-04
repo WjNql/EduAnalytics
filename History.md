@@ -1,7 +1,7 @@
 # 此处存储大致过程
 ## 25.2.4
 ### linux命令
-创建 nql -> EduAnalytics (adduser, mkdir, touch, ls -a, sudo su, exit, mv, sudo chown -R nieqianlong:nieqianlong /EduAnalytics)
+创建 nql -> EduAnalytics (adduser, mkdir, touch, ls -a, sudo su, exit, mv, sudo chown -R nieqianlong:nieqianlong /EduAnalytics, nvidia-smi, nvcc-v)
 linux命令问题不大
 主要是创建了一个用户
 创建用户命令：adduser
@@ -34,3 +34,20 @@ linux命令问题不大
 - 初始化时修改 git init -b main
 - 初始化后修改 git branch -m master main
 - 全局修改 git config --global init.defaultBranch main
+### conda命令
+开放conda权限
+# 假设 Conda 安装在 /home/ubuntu/anaconda3
+sudo chmod -R 755 /home/ubuntu/anaconda3  # 开放读和执行权限
+创建共享组
+sudo groupadd shared_group  # 创建共享组
+sudo usermod -aG shared_group ubuntu
+sudo usermod -aG shared_group nieqianlong
+sudo chgrp -R shared_group /home/ubuntu/anaconda3  # 修改目录所属组
+sudo chmod -R 775 /home/ubuntu/anaconda3  # 组用户可读写执行
+在 nieqianlong 用户的 ~/.bashrc 中添加：
+export PATH="/home/ubuntu/anaconda3/bin:$PATH"
+刷新环境 source ~/.bashrc
+# 在 ~/.bashrc 或 /etc/profile 中添加
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+conda env list
