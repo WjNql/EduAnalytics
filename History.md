@@ -69,3 +69,12 @@ python -m ipykernel install --user --name edu_analytics --display-name "Edu_Anal
 touch data_cleaner.py
 pip install pyarrow
 touch run_pipeline.sh
+touch basic_analysis.py
+mkdir -p data/{raw,processed} src reports/figures
+touch data_generation.py
+touch .gitignore
+git add .gitignore
+git commit -m "Add .gitignore to ignore hidden files"
+chmod +x run_pipeline.sh
+./run_pipeline.sh
+python src/basic_analysis.py

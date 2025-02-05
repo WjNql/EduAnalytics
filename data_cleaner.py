@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 class GradeCleaner:
-    def __init__(self, raw_path='data/raw/demo_grades.csv'):
+    def __init__(self, raw_path='demo_grades.csv'):
         self.raw_data = pd.read_csv(raw_path)
         
     def handle_outliers(self, df, subject):
@@ -29,4 +29,4 @@ class GradeCleaner:
 if __name__ == "__main__":
     cleaner = GradeCleaner()
     cleaned_df = cleaner.pipeline()
-    cleaned_df.to_parquet('data/processed/cleaned_grades.parquet', index=False)
+    cleaned_df.to_parquet('cleaned_grades.parquet', index=False)
