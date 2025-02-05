@@ -35,8 +35,11 @@ linux命令问题不大
 - 初始化后修改 git branch -m master main
 - 全局修改 git config --global init.defaultBranch main
 ### conda命令
+- 在 ~/.bashrc 或 /etc/profile 中添加
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 开放conda权限
-# 假设 Conda 安装在 /home/ubuntu/anaconda3
+- 假设 Conda 安装在 /home/ubuntu/anaconda3
 sudo chmod -R 755 /home/ubuntu/anaconda3  # 开放读和执行权限
 创建共享组
 sudo groupadd shared_group  # 创建共享组
@@ -47,7 +50,14 @@ sudo chmod -R 775 /home/ubuntu/anaconda3  # 组用户可读写执行
 在 nieqianlong 用户的 ~/.bashrc 中添加：
 export PATH="/home/ubuntu/anaconda3/bin:$PATH"
 刷新环境 source ~/.bashrc
-# 在 ~/.bashrc 或 /etc/profile 中添加
-export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 conda env list
+- 初始化 Conda 到当前 Shell
+conda init bash
+source ~/.bashrc
+conda create -n edu_analytics python=3.9
+conda activate edu_analytics
+
+## 25.2.5
+###
+- 安装基础工具包
+pip install pandas numpy matplotlib jupyterlab
