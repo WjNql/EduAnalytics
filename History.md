@@ -74,7 +74,10 @@ mkdir -p data/{raw,processed} src reports/figures
 touch data_generation.py
 touch .gitignore
 git add .gitignore
+python data_generation.py
 git commit -m "Add .gitignore to ignore hidden files"
 chmod +x run_pipeline.sh
 ./run_pipeline.sh
-python src/basic_analysis.py
+python basic_analysis.py
+---
+./run_pipeline.sh

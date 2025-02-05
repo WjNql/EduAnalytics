@@ -8,4 +8,4 @@ grades_data = {
     'class': ['A班' if i<25 else 'B班' for i in range(50)]
 }
 df = pd.DataFrame(grades_data)
-df.to_csv('data/raw/demo_grades.csv', index=False)
+df.to_csv('demo_grades.csv', index=False)
