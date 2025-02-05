@@ -60,4 +60,11 @@ conda activate edu_analytics
 ## 25.2.5
 ###
 - 安装基础工具包
-pip install pandas numpy matplotlib jupyterlab
+pip install pandas numpy matplotlib jupyterlab jupyter
+<!-- jupyter lab --generate-config (jupyter生成配置文件) -->
+jupyter notebook --generate-config
+jupyter notebook password
+conda install ipykernel
+python -m ipykernel install --user --name edu_analytics --display-name "Edu_Analytics"
+
+
