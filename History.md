@@ -66,5 +66,6 @@ jupyter notebook --generate-config
 jupyter notebook password
 conda install ipykernel
 python -m ipykernel install --user --name edu_analytics --display-name "Edu_Analytics"
-
-
+touch data_cleaner.py
+pip install pyarrow
+touch run_pipeline.sh
