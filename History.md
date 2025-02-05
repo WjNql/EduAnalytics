@@ -81,3 +81,8 @@ chmod +x run_pipeline.sh
 python basic_analysis.py
 ---
 ./run_pipeline.sh
+---
+touch knowledge_model.py
+使用 Git reset 命令来取消上一次提交：
+git reset HEAD~1
+
