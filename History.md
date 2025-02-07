@@ -58,8 +58,7 @@ conda create -n edu_analytics python=3.9
 conda activate edu_analytics
 
 ## 25.2.5
-###
-- 安装基础工具包
+### 使用命令
 pip install pandas numpy matplotlib jupyterlab jupyter
 <!-- jupyter lab --generate-config (jupyter生成配置文件) -->
 jupyter notebook --generate-config
@@ -86,3 +85,53 @@ touch knowledge_model.py
 使用 Git reset 命令来取消上一次提交：
 git reset HEAD~1
 
+---
+
+## 25.2.7
+### 安装docker
+#### 1.1 卸载旧版本（如存在）
+sudo apt-get remove docker docker-engine docker.io containerd runc
+#### 1.2 安装依赖工具
+sudo apt-get update
+- 小插曲
+>检查和清理 /etc/apt/sources.list 文件
+>打开 /etc/apt/sources.list 文件：
+>sudo nano /etc/apt/sources.list
+>检查文件内容，删除重复的条目。确保每个软件源只出现一次。
+
+sudo apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+作用：
+ca-certificates：SSL证书支持
+curl：网络传输工具
+gnupg：加密密钥管理
+lsb-release：系统版本信息工具
+#### 1.3 添加Docker官方GPG密钥
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+解释：
+创建密钥存储目录
+下载Docker官方加密密钥并转换为apt可识别的格式
+#### 1.4 设置软件仓库源
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+参数解析：
+arch=$(dpkg --print-architecture)：自动获取系统架构（x86_64/arm等）
+signed-by：指定密钥验证路径
+stable：使用稳定版仓库
+
+#### 1.5 安装Docker引擎
+
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+组件说明：
+docker-ce：社区版核心
+docker-ce-cli：命令行工具
+containerd.io：容器运行时
+docker-compose-plugin：编排工具
