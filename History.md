@@ -169,3 +169,57 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 6. 验证成功安装
 sudo docker run --rm hello-world
 应看到Docker成功运行测试容器
+- 小插曲
+创建/修改Docker配置
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": [
+    "https://ung2thfc.mirror.aliyuncs.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com"
+  ],
+  "dns": ["8.8.8.8", "114.114.114.114"]
+}
+EOF
+
+重启服务生效
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+验证加速器配置
+查看生效配置
+sudo docker info | grep -A 1 Mirrors
+ 应看到类似输出：
+  Registry Mirrors:
+   https://ung2thfc.mirror.aliyuncs.com/
+再次尝试运行测试
+sudo docker run --rm hello-world
+
+ sudo chmod a+w /etc/resolv.conf
+ sudo chmod 444 /etc/resolv.conf
+
+dig @114.114.114.114 registry-1.docker.io
+
+199.193.116.105    registry-1.docker.io
+
+sudo vim /etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://ueo0uggy.mirror.aliyuncs.com",
+    "https://docker.m.daocloud.io",
+    "https://cf-workers-docker-io-apl.pages.dev",
+
+  ]
+}
+
+{
+  "registry-mirrors":[
+    "https://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://ueo0uggy.mirror.aliyuncs.com",
+    "https://docker.m.daocloud.io",
+    "https://cf-workers-docker-io-apl.pages.dev"
+  ],
+  "dns": ["8.8.8.8", "114.114.114.114"]
+}
