@@ -135,3 +135,37 @@ docker-ce：社区版核心
 docker-ce-cli：命令行工具
 containerd.io：容器运行时
 docker-compose-plugin：编排工具
+（小插曲）
+1. 清理现有配置
+sudo rm -f /etc/apt/sources.list.d/docker.list
+sudo rm -f /etc/apt/keyrings/docker.gpg
+2. 重建Docker源配置（国内优化版）
+使用中科大镜像源替代官方源
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+添加镜像源
+sudo add-apt-repository \
+   "deb [arch=$(dpkg --print-architecture)] \
+   https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+添加GPG密钥
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
+
+3. 验证发行版代号
+确保返回结果与仓库支持版本一致
+lsb_release -cs  # 应该返回"focal"
+
+4. 手动检查仓库结构
+验证仓库路径是否存在
+curl -I https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/dists/focal/stable/
+应返回HTTP 200状态码
+
+5. 重新安装Docker
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+6. 验证成功安装
+sudo docker run --rm hello-world
+应看到Docker成功运行测试容器
