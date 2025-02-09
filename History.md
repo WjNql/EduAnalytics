@@ -223,3 +223,35 @@ sudo vim /etc/docker/daemon.json
   ],
   "dns": ["8.8.8.8", "114.114.114.114"]
 }
+
+## 25.2.9
+conda config --set auto_activate_base False
+sudo docker run --rm hello-world(莫名其妙docker就好了)
+### Neo4j容器部署
+1. 创建专用目录
+mkdir -p ~/neo4j/{data,import,logs}
+2. 运行Neo4j容器（5.12版本）
+sudo docker run -d \
+    --name edu_kg \
+    -p 7474:7474 \
+    -p 7687:7687 \
+    -v $HOME/neo4j/data:/data \
+    -v $HOME/neo4j/import:/import \
+    -v $HOME/neo4j/logs:/logs \
+    -e NEO4J_AUTH=neo4j/YourSecurePassword \
+    -e NEO4JLABS_PLUGINS='["apoc"]' \
+    neo4j:5.12
+
+3. 查看运行状态
+sudo docker ps | grep edu_kg
+sudo docker exec -it edu_kg cypher-shell -u neo4j -p YourSecurePassword
+> MATCH (n) RETURN n LIMIT 1;
+:quit
+端口连通性检查：
+curl -v telnet://localhost:7474  # 应返回Connected
+netstat -tuln | grep '7474\|7687'
+手动修改：
+访问地址：http://<您的服务器IP>:7474
+在Cypher输入框执行
+:server change-password
+pip install py2neo==2021.2.4
