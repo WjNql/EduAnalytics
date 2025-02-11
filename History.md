@@ -255,3 +255,14 @@ netstat -tuln | grep '7474\|7687'
 在Cypher输入框执行
 :server change-password
 pip install py2neo==2021.2.4
+
+## 25.2.10
+touch model.py
+创建知识点数据文件
+touch data/raw/math_concepts.csv
+创建题目关联文件 
+touch data/raw/question_relations.csv
+
+touch import_kg.py
+// 创建全文索引加速搜索
+CREATE FULLTEXT INDEX conceptSearch FOR (n:Concept) ON EACH [n.name, n.subject]

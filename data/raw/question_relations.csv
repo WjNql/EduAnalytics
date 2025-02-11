@@ -1,0 +1,4 @@
+question_id,concept_id,weight
+Q1001,M1_1,0.8
+Q1001,M1_2,0.6
+Q1002,M1,0.9

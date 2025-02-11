@@ -1,0 +1,4 @@
+concept_id,parent_id,name,difficulty
+M1,,二次函数,0.75
+M1_1,M1,图像性质,0.65
+M1_2,M1,顶点坐标,0.7
